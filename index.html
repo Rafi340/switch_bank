@@ -67,6 +67,7 @@
     </div>
 </div>
     <script>
+        // login button
         const logbtn= document.getElementById("log-id");
         logbtn.addEventListener("click",function(){
             const loginArea= document.getElementById('log-area');
@@ -74,7 +75,7 @@
             const acccountDetails= document.getElementById("account-details");
             acccountDetails.style.display="block";
         })
-
+        // deposit event
         const depositBtn = document.getElementById("addDeposit");
         depositBtn.addEventListener("click",function(){
            // const depositMoney = document.getElementById("addMoney").value;
@@ -95,11 +96,13 @@
 
         })
 
-        // withdraw
+        // withdraw event
         const withdrawBtn= document.getElementById("withdrawButton");
         withdrawBtn.addEventListener("click", function(){
-            const amount = getInputAmount("withdrawBalance");
-            console.log(amount);
+            const withdrawAmount = getInputAmount("withdrawBalance");
+            updateSpanText("totalWithdraw",withdrawAmount );
+            updateSpanText("totalMoneyBalance",-1 * withdrawAmount);
+            document.getElementById("withdrawBalance").value="";
         })
 
         function getInputAmount(id){
@@ -116,7 +119,7 @@
            const totalDollar = BalanceParseFloat + totalDepositDollar;
            document.getElementById(id).innerText=totalDollar;
         }
-        
+
 
         
         
