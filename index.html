@@ -27,21 +27,21 @@
         <div class="col-md-4 ">
             <div class="deposit boxStyle">
                 <h5>Deposit</h5>
-                <h2>$ 00</h2> 
+                <h2>$<span id="totalBalance">00</span></h2> 
             </div>
             
         </div>
         <div class="col-md-4">
             <div class="withdraw boxStyle">
                 <h5>Withdraw</h5>
-            <h2>$ 00</h2>
+            <h2>$<span id="totalWithdraw">00</span></h2>
             </div>
             
         </div>
         <div class="col-md-4">
             <div class="balance boxStyle">
                 <h5>Balance</h5>
-            <h2>$ 898989</h2>
+            <h2>$<span id="totalMoneyBalance">7000</span></h2>
             </div>
             
         </div>
@@ -50,17 +50,17 @@
         <div class="col-md-6">
             <div class="submit-area ">
                 <h4>Deposit</h4>
-                <input type="text" class="form-control"  placeholder="Deposit with $ Only">
+                <input type="text" class="form-control" id="addMoney"  placeholder="Deposit with $ Only">
                 <br>
-                <button class="btn btn-success "> Deposit</button></div>
+                <button class="btn btn-success " id="addDeposit"> Deposit</button></div>
             </div>
            
         <div class="col-md-6">
             <div class="submit-area">
                 <h4>Withdraw</h4>
-            <input type="text" placeholder="withdraw only $ currency " class="form-control">
+            <input type="text" placeholder="withdraw only $ currency" id="withdrawBalance" class="form-control">
             <br>
-            <button class="btn btn-success" >Withdraw</button>
+            <button class="btn btn-success" id="withdrawButton" >Withdraw</button>
             </div>
             
         </div>
@@ -74,6 +74,54 @@
             const acccountDetails= document.getElementById("account-details");
             acccountDetails.style.display="block";
         })
+
+        const depositBtn = document.getElementById("addDeposit");
+        depositBtn.addEventListener("click",function(){
+           // const depositMoney = document.getElementById("addMoney").value;
+           // const totalDepositDollar= parseFloat(depositMoney);
+            const totalDepositDollar = getInputAmount("addMoney");
+
+            const totalDeposit = document.getElementById("totalBalance").innerText;
+            const totalBalanceInAccount= parseFloat(totalDeposit);
+       
+
+        const totalAmmount= totalDepositDollar + totalBalanceInAccount;
+        document.getElementById("totalBalance").innerText=totalAmmount;
+
+        updateSpanText("totalMoneyBalance", totalDepositDollar);
+        
+
+        document.getElementById("addMoney").value="";
+
+        })
+
+        // withdraw
+        const withdrawBtn= document.getElementById("withdrawButton");
+        withdrawBtn.addEventListener("click", function(){
+            const amount = getInputAmount("withdrawBalance");
+            console.log(amount);
+        })
+
+        function getInputAmount(id){
+            const money=document.getElementById(id).value;
+            const amount = parseFloat(money);
+            return amount;
+        } 
+
+
+
+        function updateSpanText(id, totalDepositDollar){
+            const currentBalance=document.getElementById(id).innerText;
+           const BalanceParseFloat=parseFloat(currentBalance);
+           const totalDollar = BalanceParseFloat + totalDepositDollar;
+           document.getElementById(id).innerText=totalDollar;
+        }
+        
+
+        
+        
+
+
     </script>
     
 </body>
